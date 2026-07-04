@@ -1,0 +1,10 @@
+[metadata]
+title = "My First Game"
+author = "Your Name"
+description = "Built on a Chromebook/Phone"
+version = "1.0.0"
+
+[build]
+targets = ["3ds"]
+source = "."
+packaged = true
