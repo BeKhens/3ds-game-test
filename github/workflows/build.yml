@@ -1,0 +1,30 @@
+name: Build 3DS CIA
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-python: '3.x'
+
+      - name: Install LoveBrew CLI Tool
+        run: |
+          pip install git+https://github.com/lovebrew/bundler-old.git
+          sudo apt-get update && sudo apt-get install -y zip
+
+      - name: Compile Game to CIA
+        run: |
+          lovebrew -b 1.0.0
+
+      - name: Upload CIA File
+        uses: actions/upload-artifact@v4
+        with:
+          name: 3ds-game-cia
+          path: "*.cia"
+          
