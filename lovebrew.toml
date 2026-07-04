@@ -1,0 +1,10 @@
+[metadata]
+title = "My First Game"
+author = BeKhens
+description = "Built on a Chromebook/Phone"
+version = "1.0.0"
+
+[build]
+targets = ["ctr"]
+source = "."
+packaged = true
