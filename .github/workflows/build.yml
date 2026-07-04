@@ -1,0 +1,25 @@
+name: Build 3DS CIA
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust (Required for new tool)
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install nestcli Tool
+        run: cargo install --git https://github.com/lovebrew/nestcli
+
+      - name: Compile Game to CIA
+        run: nestcli bundle --target 3ds
+
+      - name: Upload CIA File
+        uses: actions/upload-artifact@v4
+        with:
+          name: 3ds-game-cia
+          path: build/3ds/*.cia
+          
